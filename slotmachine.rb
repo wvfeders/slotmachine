@@ -46,10 +46,13 @@ sample3 = fruit.shuffle.pop
 		print "\n CONGRATULATIONS!! You won #{wager * 1000} tokens \n\n"
 		pot = pot + (wager * 1000)
 	end
-
+if pot <= 0 
+    print "You have no tokens left \n"
+    abort ("Thanks for playing")
+end    
 print "You have #{pot} tokens remaining \n"
 
-print "\nTo play again enter an amount. Enter 0 to quit playing? \n"
+print "\nTo play again enter an amount. Enter 0 to quit playing. \n"
 wager = Integer(gets.chomp)
 #if play_again =="Y" or "y"
 #	play(pot)
