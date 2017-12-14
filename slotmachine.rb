@@ -27,18 +27,17 @@ sample2 = fruit.shuffle.pop
 
 sample3 = fruit.shuffle.pop
 
-
+Sound.play("c:\\windows\\media\\recycle.wav")
 	print "\n", sample1 
-	Sound.play("c:\\windows\\media\\chimes.wav")
+	
 	#sleep(0.5)
-
+Sound.play("c:\\windows\\media\\recycle.wav")
 	print "\t", sample2 
-	Sound.play("c:\\windows\\media\\chimes.wav")
+	
 	#sleep(0.5)
-
-	print "\t", sample3, "\n"
-	Sound.play("c:\\windows\\media\\chimes.wav")
-	#sleep(0.5)
+Sound.play("c:\\windows\\media\\recycle.wav")
+	print "\t", sample3, "\n\n"
+	sleep(0.3)
 	if sample1 == "apple" && sample2 == "apple" && sample3 == "apple"
 		
 		print "\n CONGRATULATIONS!! You won #{wager * 10} tokens \n\n"
