@@ -75,6 +75,7 @@ if sample1 == "apple" && sample2 == "apple" && sample3 == "apple" #if 3 apples a
 	(sample1 == "cherry" && sample2 == "cherry") || (sample1 == "cherry" && sample3 == "cherry") || (sample2 == "cherry" && sample3 == "cherry")
 		print "\n CONGRATULATIONS!! You won #{wager * 5} tokens \n\n"
 		Sound.play("c:\\Windows\\media\\chimes.wav")
+		pot = pot + (wager * 5)
 
 	elsif 
 	sample1 == "cherry" || sample2 == "cherry" || sample3 == "cherry"
