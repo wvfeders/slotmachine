@@ -3,11 +3,11 @@
 require 'win32/sound' #these two lines allow access to sounds uisng sound.play below. it was
 					#necessary to install the win32/sound gem to make this work (gem install win32-sound --platform=ruby)
 include Win32
-
+Dir.chdir ".."
 pot = 100 #Player starts with 100 tokens
 
 print "This is a three wheel slot machine, \n" #These lines tell the player how to play the game
-print "You start the game with 100 tokens, \n"
+print "You start a new game with 100 tokens or with your tokens from your previous game, whichever is greater.\n"
 
 print "The payout per token wagered is as follows: \n"
 print "3 cherries = 1000 tokens \n"
@@ -16,8 +16,29 @@ print "3 grapes   = 25  tokens \n"
 print "3 apples   = 10  tokens \n"
 print "2 cherries =  5  tokens \n"
 print "1 cherry   =  1  token \n"
+print "Enter your player name: \n"
+name1 = gets.chomp 
+player_name = name1 
 
-print "How many tokens do you want to wager? \n" #Asks for a wager
+name_extension = ".txt"
+
+name2 = player_name.concat(name_extension)
+
+print ",  have you played before? (y or n) \n\n"
+answer = gets.chomp.downcase
+if answer  == 'y'
+	
+	in_file = File.open(name2, 'r')
+	in_data = in_file.read
+	pot = in_data.to_i
+	
+	if pot < 100
+		pot = 100
+	end	
+	
+end
+print "You will start with #{pot} tokens. \n\n"
+print "\nHow many tokens do you want to wager? \n" #Asks for a wager
 wager = Integer(gets.chomp)  #establishes variable to capture the wager from the screen
 
 
@@ -89,6 +110,9 @@ end
 
 	if pot <= 0 									#if pot is empty these three lines are accessed and the program ends
    		 print "You have no tokens left \n"
+    	 outfile = File.open(name1, 'w')
+		 outfile.write(pot)
+		 Dir.chdir "slotmachine"
     	 abort ("Thanks for playing")
 	end    
 print "You have #{pot} tokens remaining \n"	#indicates how many tokens are in the pot
@@ -99,4 +123,7 @@ wager = Integer(gets.chomp)     #acepts wager for 2nd and any subsequent bet
 	
 end  #ends the long loop
 
+outfile = File.open(name1, 'w')
+outfile.write(pot)
+Dir.chdir "slotmachine"
 abort ("Thanks for playing") #ends the program and thanks the player for playing	
