@@ -1,9 +1,10 @@
 #This program simulates a very simple three wheel slot machine
+#The game allows the player to save tokens between runs of the program (for example day to day)
 
 require 'win32/sound' #these two lines allow access to sounds uisng sound.play below. it was
 					#necessary to install the win32/sound gem to make this work (gem install win32-sound --platform=ruby)
 include Win32
-Dir.chdir ".."
+Dir.chdir ".."   #changes working directory one directory up
 pot = 100 #Player starts with 100 tokens
 
 print "This is a three wheel slot machine, \n" #These lines tell the player how to play the game
@@ -17,22 +18,22 @@ print "3 apples   = 10  tokens \n"
 print "2 cherries =  5  tokens \n"
 print "1 cherry   =  1  token \n"
 print "Enter your player name: \n"
-name1 = gets.chomp 
-player_name = name1 
+name1 = gets.chomp  #accepts player name
+#player_name = name1  
 
-name_extension = ".txt"
+name_extension = ".txt" #creates vaialbe to hold .txt extension
 
-name2 = player_name.concat(name_extension)
+name1 = name1.concat(name_extension) #concatenates name and .txt
 
-print ",  have you played before? (y or n) \n\n"
-answer = gets.chomp.downcase
+print ",  have you played before? (y or n) \n\n" #asks player of they have played to that stored tokens acan be accessed
+answer = gets.chomp.downcase  #accepts y n answer
 if answer  == 'y'
 	
-	in_file = File.open(name2, 'r')
+	in_file = File.open(name1, 'r') #if opens file and obtains token count from previous play
 	in_data = in_file.read
 	pot = in_data.to_i
 	
-	if pot < 100
+	if pot < 100 #if previous token count is <100 token count in  set to 100
 		pot = 100
 	end	
 	
@@ -110,9 +111,9 @@ end
 
 	if pot <= 0 									#if pot is empty these three lines are accessed and the program ends
    		 print "You have no tokens left \n"
-    	 outfile = File.open(name1, 'w')
-		 outfile.write(pot)
-		 Dir.chdir "slotmachine"
+    	 outfile = File.open(name1, 'w') #opens file
+		 outfile.write(pot)					#writes token count to file
+		 Dir.chdir "slotmachine"			#changes working directory back up to slotmachine
     	 abort ("Thanks for playing")
 	end    
 print "You have #{pot} tokens remaining \n"	#indicates how many tokens are in the pot
@@ -123,7 +124,7 @@ wager = Integer(gets.chomp)     #acepts wager for 2nd and any subsequent bet
 	
 end  #ends the long loop
 
-outfile = File.open(name1, 'w')
-outfile.write(pot)
-Dir.chdir "slotmachine"
+outfile = File.open(name1, 'w') #if player chooses to stop playing the write fle is opened
+outfile.write(pot)				#writes token count to file
+Dir.chdir "slotmachine"			#changes working directory back to slotmachine
 abort ("Thanks for playing") #ends the program and thanks the player for playing	
